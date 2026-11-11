@@ -35,13 +35,13 @@ public class Intake extends Mechanism implements Loggable {
     }
 
     public void retract() {
-        setPosition(90);
-    }
+        setPosition(0);
+    {
 
     if (hasGamePiece == true) {
         hGP = "does";
     } else {
-        hGP = "does not";
+        hGP = "does not";}}
     }
 
     @Override 

@@ -20,7 +20,6 @@ public class RobotSim {
         // Mechanism generic = new Mechanism("Generic Mechanism");
 
         Loggable[] loggable = {arm, elevator, battery, climber, intake};
-        
 
         Scanner scanner = new Scanner(System.in);
         printHelp();
@@ -87,19 +86,38 @@ public class RobotSim {
                         System.out.println("Elevator position: " + elevator.getPosition() + " meters");
                         break;
                     case "intake":
-                        intake.intake();
-                        intake.printStatus();
+                        if (parts.length != 2) {
+                            System.out.println("Usage: intake <deploymentInDegrees>");
+                            break;
+                        }
+                        intake.setPosition(Double.parseDouble(parts[1]));
+                        System.out.println("Intake position: " + intake.getPosition() + " degrees");
                         break;
-                    case "outtake":
-                        intake.outtake();
-                        intake.printStatus();
+                    case "collect":
+                        intake.collect();
+                        System.out.println("Running intake...");
+                        System.out.println("Object collected");
+                        break;
+                    case "drop":
+                        intake.eject();
+                        System.out.println("Running intake...");
+                        System.out.println("Object(s) dropped");
+                        break;
+                    case "deploy":
+                        intake.deploy();
+                        System.out.println("Deploying intake...");
+                        System.out.println("Intake position: " + intake.getPosition() + " degrees");
+                        break;
+                    case "return":
+                        intake.retract();
+                        System.out.println("Retracting intake...");
+                        System.out.println("Intake position: " + intake.getPosition() + " degrees");
                         break;
                     case "status":
                         drivetrain.printStatus();
-                        intake.printStatus();
 
                         for(int i = 0; i > loggable.length; i++) {
-                            loggable[i].printStatus();
+                            (loggable[i]).printStatus();
                         }
                         // IN CLASS: After adding Loggable, try replacing this
                         // section with a Loggable[] loop over the components.
@@ -130,12 +148,13 @@ public class RobotSim {
         System.out.println("arm <degrees>         Set arm angle (0 to 180)");
         System.out.println("elevator <meters>     Set elevator height (after you write Elevator)");
         System.out.println("climber <meters>      Set climber extention meausurement (0 to 5 meters)");
-        System.out.println("extend                Fully extends climber");
-        System.out.println("retract               Fully retracts climber");
-        System.out.println("intake / outtake          Run intake motor");
-        System.out.println("stop                      Stop drivetrain");
-        System.out.println("status                    Print component status");
-        System.out.println("help                      Show these commands");
-        System.out.println("quit                      Exit the simulator");
+        System.out.println("extend / retract      Fully extends or retracts climber");
+        System.out.println("intake <degrees>      Set intake deployment angle (0 to 90)");
+        System.out.println("collect / drop        Run intake motor");
+        System.out.println("deploy / return       Deploys or retracts intake");
+        System.out.println("stop                  Stop drivetrain");
+        System.out.println("status                Print component status");
+        System.out.println("help                  Show these commands");
+        System.out.println("quit                  Exit the simulator");
     }
 }
