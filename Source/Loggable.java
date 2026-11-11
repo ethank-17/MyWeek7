@@ -4,3 +4,7 @@ package Source;
 //     void printStatus();
 //
 // Create the interface here during the lesson.
+public interface Loggable {
+
+     public void printStatus();
+}

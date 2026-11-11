@@ -18,8 +18,11 @@ quit
 The `Scanner` loop is already written for you.
 
 1. Where is `main()`?
+   RobotSim.java
 2. Which class contains four `Motor` objects?
+   Drivetrain.java
 3. Find the `drive()` method in `Drivetrain`. How does having this method save us work elsewhere in the program?
+   So follower speed always equals leader speed
 
 ## 1. Guided example: Arm extends Mechanism
 

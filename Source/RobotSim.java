@@ -8,15 +8,19 @@ public class RobotSim {
         Drivetrain drivetrain = new Drivetrain();
         Intake intake = new Intake();
         Arm arm = new Arm();
+        Climber climber = new Climber();
 
         // IN CLASS: After writing Elevator.java, replace null with new Elevator().
-        Mechanism elevator = null;
+        Elevator elevator = new Elevator();
 
         BatteryMonitor battery = new BatteryMonitor(12.6);
 
         // IN CLASS: Try creating a generic Mechanism here. Later, when
         // Mechanism becomes abstract, that line should no longer compile.
         // Mechanism generic = new Mechanism("Generic Mechanism");
+
+        Loggable[] loggable = {arm, elevator, battery, climber, intake};
+        
 
         Scanner scanner = new Scanner(System.in);
         printHelp();
@@ -53,6 +57,22 @@ public class RobotSim {
                         arm.setPosition(Double.parseDouble(parts[1]));
                         System.out.println("Arm position: " + arm.getPosition() + " degrees");
                         break;
+                    case "climber":
+                        if (parts.length != 2) {
+                            System.out.println("Usage: climber <extensionInMeters>");
+                            break;
+                        }
+                        climber.setPosition(Double.parseDouble(parts[1]));
+                        System.out.println("Climber position: " + climber.getPosition() + " meters");
+                        break;
+                    case "extend":
+                        climber.extend();
+                        System.out.println("Climber position: " + climber.getPosition() + " meters");
+                        break;
+                    case "retract":
+                        climber.retract();
+                        System.out.println("Climber position: " + climber.getPosition() + " meters");
+                        break;
                     case "elevator":
                         if (parts.length != 2) {
                             System.out.println("Usage: elevator <heightInMeters>");
@@ -76,12 +96,11 @@ public class RobotSim {
                         break;
                     case "status":
                         drivetrain.printStatus();
-                        System.out.println("Arm position: " + arm.getPosition() + " degrees");
-                        if (elevator != null) {
-                            System.out.println("Elevator position: " + elevator.getPosition() + " meters");
-                        }
                         intake.printStatus();
-                        battery.printStatus();
+
+                        for(int i = 0; i > loggable.length; i++) {
+                            loggable[i].printStatus();
+                        }
                         // IN CLASS: After adding Loggable, try replacing this
                         // section with a Loggable[] loop over the components.
                         break;
@@ -110,10 +129,13 @@ public class RobotSim {
         System.out.println("drive <left> <right>  Set tank-drive motor speeds (-100 to 100)");
         System.out.println("arm <degrees>         Set arm angle (0 to 180)");
         System.out.println("elevator <meters>     Set elevator height (after you write Elevator)");
-        System.out.println("intake / outtake      Run intake motor");
-        System.out.println("stop                  Stop drivetrain");
-        System.out.println("status                Print component status");
-        System.out.println("help                  Show these commands");
-        System.out.println("quit                  Exit the simulator");
+        System.out.println("climber <meters>      Set climber extention meausurement (0 to 5 meters)");
+        System.out.println("extend                Fully extends climber");
+        System.out.println("retract               Fully retracts climber");
+        System.out.println("intake / outtake          Run intake motor");
+        System.out.println("stop                      Stop drivetrain");
+        System.out.println("status                    Print component status");
+        System.out.println("help                      Show these commands");
+        System.out.println("quit                      Exit the simulator");
     }
 }
