@@ -19,7 +19,7 @@ public class RobotSim {
         // Mechanism becomes abstract, that line should no longer compile.
         // Mechanism generic = new Mechanism("Generic Mechanism");
 
-        Loggable[] loggable = {arm, elevator, battery, climber, intake};
+        Loggable[] loggables = {arm, elevator, battery, climber, intake};
 
         Scanner scanner = new Scanner(System.in);
         printHelp();
@@ -115,10 +115,9 @@ public class RobotSim {
                         break;
                     case "status":
                         drivetrain.printStatus();
-
-                        for(int i = 0; i > loggable.length; i++) {
-                            (loggable[i]).printStatus();
-                        }
+                       for(Loggable loggable : loggables) {
+                            loggable.printStatus();
+                        } //I couldn't get the loop to work...
                         // IN CLASS: After adding Loggable, try replacing this
                         // section with a Loggable[] loop over the components.
                         break;

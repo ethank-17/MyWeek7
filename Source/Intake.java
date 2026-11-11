@@ -3,7 +3,7 @@ package Source;
 public class Intake extends Mechanism implements Loggable {
     private Motor motor;
     boolean hasGamePiece;
-    String hGP;    
+    String hGP = "does not";    
 
     public Intake() {
         super("intake");

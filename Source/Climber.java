@@ -1,8 +1,13 @@
 package Source;
 
-public class Climber extends Mechanism implements Loggable {
+public class Climber extends Mechanism implements Loggable, Resettable {
     public Climber() {
         super("Climber");
+    }
+
+    @Override
+    public void reset() {
+        retract();
     }
 
     @Override

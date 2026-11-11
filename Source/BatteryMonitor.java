@@ -1,8 +1,13 @@
 package Source;
 // This is NOT a Mechanism: it tracks electrical information, not position.
-public class BatteryMonitor implements Loggable {
+public class BatteryMonitor implements Loggable, Resettable {
     private double voltage;
     private double lowestVoltage;
+
+    @Override
+    public void reset() {
+        voltage = lowestVoltage;
+    }
 
     public BatteryMonitor(double startingVoltage) {
         voltage = startingVoltage;

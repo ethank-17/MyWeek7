@@ -1,5 +1,10 @@
 package Source;
-public class Elevator extends Mechanism implements Loggable{
+public class Elevator extends Mechanism implements Loggable, Resettable {
+    @Override
+    public void reset() {
+        setPosition(0);
+    }
+
     public Elevator() {
         super("Elevator");
     }
