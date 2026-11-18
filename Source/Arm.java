@@ -5,7 +5,7 @@ public class Arm extends Mechanism implements Loggable{
         super("Arm");
     }
 
-    // TODO (together): Override setPosition(double position).
+    // TODONE (together): Override setPosition(double position).
     @Override
     public void setPosition(double position) {
         if (position >= 0 && position <= 180) {

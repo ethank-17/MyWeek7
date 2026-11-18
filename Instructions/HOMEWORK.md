@@ -156,7 +156,10 @@ Check that:
 Answer the following questions:
 
 1. Identify **one example of inheritance** and **one example of composition** in your updated program. Explain each relationship.
+   One example of inheritance is arm extending motor because arm inherits some of motor's traits, like name and position.
+   One example of composition is that the intake has a motor because in java, composition means "has-a," and the intake is composed of two motors.
 2. Which classes implement `Resettable`, and what does resetting mean for each one?
+   BatteryMonitor, Climber, and Elevator all implement resettable, which means setting position to 0 for Climber and Elevator, and setting the BatteryMonitor's voltage to the lowest voltage.
 3. Describe **one design decision** you made independently. What alternatives did you consider, and why did you choose your approach?
 
 ---

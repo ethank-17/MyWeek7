@@ -19,6 +19,12 @@ public class RobotSim {
         // Mechanism becomes abstract, that line should no longer compile.
         // Mechanism generic = new Mechanism("Generic Mechanism");
 
+//2. Put the components into different states before resetting them.
+//3. Add a `reset` case to the existing `switch` statement that calls `resetAll()`.
+//4. Print a short message when the reset command runs, and add `reset` to `printHelp()`.
+//5. Use `status` or other logging commands before and after resetting to verify that each component responds as intended.
+
+        Resettable[] resettables = {climber, battery, elevator};
         Loggable[] loggables = {arm, elevator, battery, climber, intake};
 
         Scanner scanner = new Scanner(System.in);
@@ -113,11 +119,15 @@ public class RobotSim {
                         System.out.println("Retracting intake...");
                         System.out.println("Intake position: " + intake.getPosition() + " degrees");
                         break;
+                    case "reset":
+                        resetAll(resettables);
+                        System.out.println("Resetting...");
+                        break;
                     case "status":
                         drivetrain.printStatus();
                        for(Loggable loggable : loggables) {
                             loggable.printStatus();
-                        } //I couldn't get the loop to work...
+                        }
                         // IN CLASS: After adding Loggable, try replacing this
                         // section with a Loggable[] loop over the components.
                         break;
@@ -152,8 +162,15 @@ public class RobotSim {
         System.out.println("collect / drop        Run intake motor");
         System.out.println("deploy / return       Deploys or retracts intake");
         System.out.println("stop                  Stop drivetrain");
+        System.out.println("reset                 Reset the robot");
         System.out.println("status                Print component status");
         System.out.println("help                  Show these commands");
         System.out.println("quit                  Exit the simulator");
+    }
+
+    public static void resetAll(Resettable[] components) {
+        for(Resettable resettable : components) {
+            resettable.reset();
+        }
     }
 }
